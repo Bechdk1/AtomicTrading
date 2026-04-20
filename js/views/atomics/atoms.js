@@ -1,120 +1,106 @@
-// Text elements (h1-h6, p, span)
-export const txtElm = (
-  tagName, // "h1", "p", "span"
-  textContent = "",
-) => {
-  const element = document.createElement(tagName);
-  element.textContent = textContent;
-  return element;
+import { createElement } from "react";
+
+export const setFrag = () => document.createDocumentFragment();
+
+export const setParagraph = (text = "", className = "") => {
+  const elm = document.createElement("p");
+  elm.className = className;
+  elm.textContent = text;
 };
 
-// Source elements (img, video, iframe, osv)
-export const srcElm = (
-  tagName,
-  src = "",
-  alt = "",
-  title = "",
-  attributes = {}, // autoplay, controls, loop, mv.
-) => {
-  const element = document.createElement(tagName);
-  element.src = src;
-  if (alt) element.alt = alt;
-  if (title) element.title = title;
+export const setHeading = (level = 1, text = "", className = "") => {
+  const safeLevel = Math.min(Math.max(level, 1), 6);
 
-  // Attributes hvis nødvendigt
-  Object.entries(attributes).forEach(([key, value]) => {
-    element.setAttribute(key, value);
-  });
-
-  return element;
+  const elm = document.createElement(`h${safeLevel}`);
+  elm.className = className;
+  elm.textContent = text;
 };
 
-// Navigation/Link element (a)
-export const navElm = (
-  tagName = "a", // kun a her fordi det er eneste link element
-  href = "",
-  textContent = "",
-) => {
-  const element = document.createElement(tagName);
-  element.href = href;
-  element.textContent = textContent;
-  return element;
+export const setDiv = (className = "") => {
+  const elm = createElement("div");
+  elm.className = className;
 };
 
-// Container elements (header, figure, section, div, footer, main, etc)
-export const containerElm = (tagName = "", id = "", className = "") => {
-  const element = document.createElement(tagName);
-  if (id) element.id = id;
-  if (className) element.className = className;
-  return element;
+export const setSpan = (text = "", className = "") => {
+  const elm = document.createElement("span");
+  elm.className = className;
+  elm.textContent = text;
 };
 
-// List elements (li, ul, etc.)
-export const listElm = (
-  tagName = "", // ul, li
-  textContent = "",
-) => {
-  const element = document.createElement(tagName);
-  element.textContent = textContent;
-  return element;
+export const setImage = (src = "", title = "", className = "") => {
+  const elm = document.createElement("img");
+  elm.className = className;
+  elm.src = src;
+  elm.title = title;
+  elm.alt = title;
 };
 
-// ==== FORM ELEMENTS ====
+export const setLink = (href = "", text = "", className = "") => {
+  const elm = document.createElement("a");
+  elm.className = className;
+  elm.href = href;
+  elm.textContent = text;
+};
 
-// Kun text-input box
-export const inputElm = (
-  type = "text",
+export const setUl = (className = "") => {
+  const elm = document.createElement("ul");
+  elm.className = className;
+};
+
+export const setLi = (text = "", className = "") => {
+  const elm = document.createElement("li");
+  elm.className = className;
+  elm.textContent = text;
+};
+
+export const setSection = (className = "") => {
+  const elm = document.createElement("section");
+  elm.className = className;
+};
+
+export const setArticle = (className = "") => {
+  const elm = document.createElement("article");
+  elm.className = className;
+};
+
+export const setLabel = (text = "", forId = "", className = "") => {
+  const elm = document.createElement("label");
+  elm.className = className;
+  elm.textContent = text;
+  elm.htmlFor = forId;
+};
+
+export const setInput = (
+  type = "",
   placeholder = "",
   id = "",
-  attributes = {},
-) => {
-  const input = document.createElement("input");
-  input.type = type;
-  input.placeholder = placeholder;
-  input.id = id;
-  input.name = id;
-  input.className = "inputBox";
-
-  // Funktion til at tilføje attributes som eksempelvis password requirement
-  Object.keys(attributes).forEach((key) => {
-    input.setAttribute(key, attributes[key]);
-  });
-  return input;
-};
-
-// Label element
-export const labelElm = (text, htmlFor = "") => {
-  const label = document.createElement("label");
-  label.textContent = text;
-  label.htmlFor = htmlFor;
-  label.className = "labelBox";
-  return label;
-};
-
-// Ren Submit Btn
-export const submitBtn = (text, type = "submit") => {
-  const button = document.createElement("button");
-  button.textContent = text;
-  button.type = type;
-  return button;
-};
-
-// Alternative buttons som pålægges function
-export const altBtn = (
-  text,
-  type = "button",
-  id = "",
   className = "",
-  eventType,
-  btnFunction,
 ) => {
-  const button = document.createElement("button");
-  button.textContent = text;
-  button.type = type;
-  if (id) button.id = id;
-  if (className) button.className = className;
-  if (eventType && btnFunction) {
-    button.addEventListener(eventType, btnFunction);
-  }
-  return button;
+  const elm = document.createElement("input");
+  elm.type = type;
+  elm.placeholder = placeholder;
+  elm.id = id;
+  elm.className = className;
 };
+
+export const setButton = (text = "", className = "") => {
+  const elm = document.createElement("button");
+  elm.className = className;
+  elm.textContent = text;
+};
+
+export const setNav = (className = "") => {
+  const elm = document.createElement("nav");
+  elm.className = className;
+};
+
+export const setHeader = (className = "") => {
+  const elm = document.createElement("header");
+  elm.className = className;
+};
+
+export const setFooter = (className = "") => {
+  const elm = document.createElement("footer");
+  elm.className = className;
+};
+
